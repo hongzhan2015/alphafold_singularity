@@ -12,7 +12,7 @@ From: base.sif
     # miniconda setup
     cd /opt/
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3
-    source /opt/miniconda3/etc/profile.d/conda.sh
+    . /opt/miniconda3/etc/profile.d/conda.sh
     conda create --name alphafold python==3.8
     conda update -n base conda
     conda activate alphafold
