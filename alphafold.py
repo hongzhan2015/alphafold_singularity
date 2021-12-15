@@ -3,6 +3,7 @@
 import argparse
 import datetime
 import subprocess
+import sys
 from os.path import abspath
 
 
@@ -36,11 +37,18 @@ def run(arguments):
     if num_chains > 1:
         print(f'Found FASTA file with {num_chains} sequences, treating as a multimer.')
         command.append('/opt/alphafold/multimer.sh')
+
+    print(f'Running AlphaFold, this will take a long time.')
     command.extend([abspath(arguments.database), abspath(arguments.FASTA_file), abspath(arguments.output),
                     arguments.max_template_date])
 
-    result = subprocess.run(command, check=True, capture_output=True)
-    print(f"Command completed without exception. stdout:\n{result.stdout}\n\n\nstderr:\n{result.stderr}")
+    try:
+        result = subprocess.run(command, check=True, capture_output=True)
+    except subprocess.CalledProcessError as err:
+        print(f"AlphaFold raised an exception. Exception: {err}\nstdout:\n{err.output}\n\nstderr:\n{err.stderr}")
+        sys.exit(1)
+
+    print(f"AlphaFold completed without exception. stdout:\n{result.stdout}\n\nstderr:\n{result.stderr}")
 
 
 parser = argparse.ArgumentParser()
