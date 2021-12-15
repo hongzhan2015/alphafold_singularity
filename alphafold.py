@@ -1,7 +1,8 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3
 
 import argparse
 import datetime
+import os
 import subprocess
 import sys
 from os.path import abspath
@@ -31,7 +32,8 @@ def run(arguments):
                          'https://en.wikipedia.org/wiki/FASTA_format')
 
     # Build the command
-    command = ['singularity', 'exec', '--nv', '-B', abspath(arguments.database), 'alphafold.sif']
+    singularity_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'alphafold.sif')
+    command = ['singularity', 'exec', '--nv', '-B', abspath(arguments.database), singularity_file]
     if num_chains == 1:
         print('Found FASTA file with one sequence, treating as a monomer.')
         command.append('/opt/alphafold/monomer.sh')
