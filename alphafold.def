@@ -5,8 +5,8 @@ From: base.sif
 # https://github.com/kalininalab/alphafold_non_docker
 
 %files
-    monomer.sh /opt/alphafold/monomer.sh
-    multimer.sh /opt/alphafold/multimer.sh
+    monomer.sh /opt/monomer.sh
+    multimer.sh /opt/multimer.sh
 
 %post
     # miniconda setup
@@ -32,4 +32,5 @@ From: base.sif
     pip install -r alphafold/requirements.txt
 
     cd /opt/miniconda3/envs/alphafold/lib/python3.8/site-packages/ && patch -p0 < $alphafold_path/docker/openmm.patch
-
+    mv  /opt/monomer.sh /opt/alphafold/monomer.sh
+    mv  /opt/multimer.sh /opt/alphafold/multimer.sh
