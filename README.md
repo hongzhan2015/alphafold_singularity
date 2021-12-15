@@ -23,4 +23,5 @@ sudo /usr/software/singularity/bin/singularity build alphafold.sif alphafold.def
 
 * The alphafold.py run script has no requirements and should run in vanilla python 3.8.
 * The run script allows customizing the database location and max_template_date. Call with `-h` to see usage information.
-* 
+* By default, this uses the `monomer` model for monomers and the `multimer` model for multimers,
+  and uses the `full_dbs` option for better quality results. For more details, see https://github.com/deepmind/alphafold#running-alphafold
