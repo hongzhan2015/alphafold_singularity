@@ -10,7 +10,7 @@ from os.path import abspath
 def run(arguments):
     num_chains = 0
     with open(arguments.FASTA_file, 'r') as fasta_file:
-        for pos, line in fasta_file:
+        for pos, line in enumerate(fasta_file):
             if pos % 2 == 0 and not line.startswith('>'):
                 raise ValueError(f"The {pos} line of a FASTA file should start with '>'.")
             if pos % 2 == 1 and not re.match(line, r'[A-Z].*'):
