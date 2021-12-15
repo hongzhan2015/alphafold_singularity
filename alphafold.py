@@ -22,7 +22,7 @@ def read_fasta(fp):
 
 
 def run(arguments):
-    sequences = list(read_fasta(arguments.FASTA_FILE))
+    sequences = list(read_fasta(arguments.FASTA_file))
     num_chains = len(sequences)
 
     if num_chains == 0:
