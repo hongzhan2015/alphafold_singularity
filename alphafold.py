@@ -30,18 +30,18 @@ def run(arguments):
         raise ValueError('Your FASTA file does\'t appear to be valid. Please consult documentation here: '
                          'https://en.wikipedia.org/wiki/FASTA_format')
 
+    # Build the command
     command = ['singularity', 'exec', '--nv', '-B', abspath(arguments.database), 'alphafold.sif']
     if num_chains == 1:
         print('Found FASTA file with one sequence, treating as a monomer.')
         command.append('/opt/alphafold/monomer.sh')
-    if num_chains > 1:
+    elif num_chains > 1:
         print(f'Found FASTA file with {num_chains} sequences, treating as a multimer.')
         command.append('/opt/alphafold/multimer.sh')
-
-    print(f'Running AlphaFold, this will take a long time.')
     command.extend([abspath(arguments.database), abspath(arguments.FASTA_file), abspath(arguments.output),
                     arguments.max_template_date])
 
+    print(f'Running AlphaFold, this will take a long time.')
     try:
         result = subprocess.run(command, check=True, capture_output=True)
     except subprocess.CalledProcessError as err:
