@@ -55,7 +55,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--database", "-d", action="store", default="/home/nmrbox/jwedell/alphafold_db",
                     help='The path to the AlphaFold database to use for the calculation.')
 parser.add_argument("--output-dir", "-o", action="store", default=".", dest='output',
-                    help='The path where the output data should be stored.')
+                    help='The path where the output data should be stored. Defaults to the current directory.')
 parser.add_argument("--max_template_date", "-t", action="store", default=str(datetime.date.today()),
                     help='If you are predicting the structure of a protein that is already in PDB'
                          ' and you wish to avoid using it as a template, then max_template_date must be set to'
