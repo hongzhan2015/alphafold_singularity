@@ -37,7 +37,7 @@ def run(arguments):
         print(f'Found FASTA file with {num_chains} sequences, treating as a multimer.')
         command.append('/opt/alphafold/multimer.sh')
     command.extend([abspath(arguments.database), abspath(arguments.FASTA_file), abspath(arguments.output),
-                    abspath(arguments.max_template_date)])
+                    arguments.max_template_date])
 
     result = subprocess.run(command, check=True, capture_output=True)
     print(f"Command completed without exception. stdout:\n{result.stdout}\n\n\nstderr:\n{result.stderr}")
