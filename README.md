@@ -1,24 +1,26 @@
 # AlphaFold Singularity Container
 
-This repo provides definition files to build a singularity container of AlphaFold v2 (https://github.com/deepmind/alphafold).
+This repo provides definition files to build a singularity container of AlphaFold v2 
+(https://github.com/deepmind/alphafold) that will run and be easy to invoke in the NMRbox
+environment.
 
 Build instructions from [non-docker setting](https://github.com/kalininalab/alphafold_non_docker) by kalininalab were used.
 
 ## Build container
 ```
 # build base container
-singularity build --fakeroot base.sif base.def
-
+sudo /usr/software/singularity/bin/singularity build base.sif base.def
 # build alphafold container
-singularity build --fakeroot alphafold.sif alphafold.def
+sudo /usr/software/singularity/bin/singularity build alphafold.sif alphafold.def
 ```
 
-## Run Alphafold
+## Run AlphaFold
 ```
-singularity exec --nv -B <DATA_DIR> alphafold.sif bash
-source /opt/miniconda3/etc/profile.d/conda.sh
-conda activate alphafold
-cd /opt/alphafold/
-./run.sh -d <DATA_DIR>  -o <OUTPUT_DIR> -m model_1 -f <SEQUENCE_FILE> -t 2020-05-14
+./alphafold.py /path/to/fasta/file
 ```
 
+### Notes
+
+* The alphafold.py run script has no requirements and should run in vanilla python 3.8.
+* The run script allows customizing the database location and max_template_date. Call with `-h` to see usage information.
+* 

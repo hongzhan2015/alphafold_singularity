@@ -61,6 +61,6 @@ parser.add_argument("--max_template_date", "-t", action="store", default=str(dat
                          ' and you wish to avoid using it as a template, then max_template_date must be set to'
                          ' be before the release date of the structure.')
 parser.add_argument('FASTA_file', action="store",
-                    help='The FASTA file to use for the calculation. Strict check applied.')
+                    help='The FASTA file to use for the calculation.')
 args = parser.parse_args()
 run(args)
