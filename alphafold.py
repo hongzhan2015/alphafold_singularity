@@ -1,14 +1,12 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.8
 
 import argparse
 import datetime
-import re
 import subprocess
 from os.path import abspath
 
 
 def read_fasta(file_path):
-
     with open(file_path, 'r') as fp:
         name, seq = None, []
         for line in fp:
