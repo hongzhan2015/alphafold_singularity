@@ -7,19 +7,29 @@ import subprocess
 from os.path import abspath
 
 
+def read_fasta(fp):
+    name, seq = None, []
+    for line in fp:
+        line = line.rstrip()
+        if line.startswith(">"):
+            if name:
+                yield name, ''.join(seq)
+            name, seq = line, []
+        else:
+            seq.append(line)
+    if name:
+        yield name, ''.join(seq)
+
+
 def run(arguments):
-    num_chains = 0
-    with open(arguments.FASTA_file, 'r') as fasta_file:
-        for pos, line in enumerate(fasta_file):
-            if pos % 2 == 0 and not line.startswith('>'):
-                raise ValueError(f"The {pos} line of a FASTA file should start with '>'.")
-            if pos % 2 == 1 and not re.match(line, r'[A-Z].*'):
-                raise ValueError(f"The {pos} line of a FASTA file should have a residue sequence.")
-            num_chains += 1
+    sequences = list(read_fasta(arguments.FASTA_FILE))
+    num_chains = len(sequences)
+
+    if num_chains == 0:
+        raise ValueError('Your FASTA file does\'t appear to be valid. Please consult documentation here: '
+                         'https://en.wikipedia.org/wiki/FASTA_format')
 
     command = ['singularity', 'exec', '--nv', '-B', abspath(arguments.database), 'alphafold.sif']
-    if num_chains == 0:
-        raise ValueError('No sequences found in your FASTA file.')
     if num_chains == 1:
         print('Found FASTA file with one sequence, treating as a monomer.')
         command.append('/opt/alphafold/monomer.sh')
