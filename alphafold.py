@@ -33,19 +33,20 @@ def run(arguments):
 
     # Build the command
     singularity_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'alphafold.sif')
-    command = ['singularity', 'exec', '--nv', '-B', abspath(arguments.database), singularity_file]
+    command = ['singularity', 'exec', '--nv', '-B', arguments.database, '-B',
+               arguments.output, '-B', arguments.FASTA_file, singularity_file]
+
     if num_chains == 1:
         print('Found FASTA file with one sequence, treating as a monomer.')
         command.append('/opt/alphafold/monomer.sh')
     elif num_chains > 1:
         print(f'Found FASTA file with {num_chains} sequences, treating as a multimer.')
         command.append('/opt/alphafold/multimer.sh')
-    command.extend([abspath(arguments.database), abspath(arguments.FASTA_file), abspath(arguments.output),
-                    arguments.max_template_date])
+    command.extend([arguments.database, arguments.FASTA_file, arguments.output, arguments.max_template_date])
 
     print(f'Running AlphaFold, this will take a long time.')
     try:
-        result = subprocess.run(command, check=True, capture_output=True)
+        subprocess.run(command, check=True, capture_output=True)
     except subprocess.CalledProcessError as err:
         print(f"AlphaFold raised an exception. Exception: {err}\nstdout:\n{err.output}\n\nstderr:\n{err.stderr}")
         sys.exit(1)
@@ -66,4 +67,10 @@ parser.add_argument("--max_template_date", "-t", action="store", default=str(dat
 parser.add_argument('FASTA_file', action="store",
                     help='The FASTA file to use for the calculation.')
 args = parser.parse_args()
+
+# Get absolute paths
+args.database = abspath(args.database)
+args.output = abspath(args.output)
+args.FASTA_file = abspath(args.FASTA_file)
+
 run(args)
