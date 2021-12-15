@@ -7,18 +7,20 @@ import subprocess
 from os.path import abspath
 
 
-def read_fasta(fp):
-    name, seq = None, []
-    for line in fp:
-        line = line.rstrip()
-        if line.startswith(">"):
-            if name:
-                yield name, ''.join(seq)
-            name, seq = line, []
-        else:
-            seq.append(line)
-    if name:
-        yield name, ''.join(seq)
+def read_fasta(file_path):
+
+    with open(file_path, 'r') as fp:
+        name, seq = None, []
+        for line in fp:
+            line = line.rstrip()
+            if line.startswith(">"):
+                if name:
+                    yield name, ''.join(seq)
+                name, seq = line, []
+            else:
+                seq.append(line)
+        if name:
+            yield name, ''.join(seq)
 
 
 def run(arguments):
