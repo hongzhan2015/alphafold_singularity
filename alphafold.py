@@ -9,7 +9,7 @@ from os.path import abspath
 
 def run(arguments):
     num_chains = 0
-    with open(arguments.fasta, 'r') as fasta_file:
+    with open(arguments.FASTA_file, 'r') as fasta_file:
         for pos, line in fasta_file:
             if pos % 2 == 0 and not line.startswith('>'):
                 raise ValueError(f"The {pos} line of a FASTA file should start with '>'.")
@@ -26,7 +26,7 @@ def run(arguments):
     if num_chains > 1:
         print(f'Found FASTA file with {num_chains} sequences, treating as a multimer.')
         command.append('/opt/alphafold/multimer.sh')
-    command.extend([abspath(arguments.database), abspath(arguments.fasta), abspath(arguments.output),
+    command.extend([abspath(arguments.database), abspath(arguments.FASTA_file), abspath(arguments.output),
                     abspath(arguments.max_template_date)])
 
     result = subprocess.run(command, check=True, capture_output=True)
@@ -42,7 +42,7 @@ parser.add_argument("--max_template_date", "-t", action="store", default=str(dat
                     help='If you are predicting the structure of a protein that is already in PDB'
                          ' and you wish to avoid using it as a template, then max_template_date must be set to'
                          ' be before the release date of the structure.')
-parser.add_argument('FASTA_file', action="store", dest='fasta',
+parser.add_argument('FASTA_file', action="store",
                     help='The FASTA file to use for the calculation. Strict check applied.')
 args = parser.parse_args()
 run(args)
