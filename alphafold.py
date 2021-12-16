@@ -32,9 +32,8 @@ def run(arguments):
                          'https://en.wikipedia.org/wiki/FASTA_format')
 
     # Build the command
-    singularity_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'alphafold.sif')
     command = ['singularity', 'exec', '--nv', '-B', arguments.database, '-B',
-               arguments.output, '-B', arguments.FASTA_file, singularity_file]
+               arguments.output, '-B', arguments.FASTA_file, args.singularity_container]
 
     if num_chains == 1:
         print('Found FASTA file with one sequence, treating as a monomer.')
@@ -60,10 +59,14 @@ parser.add_argument("--database", "-d", action="store", default="/reboxitory/dat
                     help='The path to the AlphaFold database to use for the calculation.')
 parser.add_argument("--output-dir", "-o", action="store", default=".", dest='output',
                     help='The path where the output data should be stored. Defaults to the current directory.')
-parser.add_argument("--max_template_date", "-t", action="store", default=str(datetime.date.today()),
+parser.add_argument("--max-template-date", "-t", action="store", default=str(datetime.date.today()),
+                    dest='max_template_date',
                     help='If you are predicting the structure of a protein that is already in PDB'
-                         ' and you wish to avoid using it as a template, then max_template_date must be set to'
+                         ' and you wish to avoid using it as a template, then max-template-date must be set to'
                          ' be before the release date of the structure.')
+parser.add_argument("--singularity-container", action="store",
+                    default=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'alphafold.sif'),
+                    help=argparse.SUPPRESS)
 parser.add_argument('FASTA_file', action="store",
                     help='The FASTA file to use for the calculation.')
 args = parser.parse_args()
@@ -72,6 +75,7 @@ args = parser.parse_args()
 args.database = abspath(args.database)
 args.output = abspath(args.output)
 args.FASTA_file = abspath(args.FASTA_file)
+args.singularity_container = abspath(args.singularity_container)
 
 # Ensure output directory is writeable
 try:
