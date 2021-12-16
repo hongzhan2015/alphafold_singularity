@@ -73,4 +73,13 @@ args.database = abspath(args.database)
 args.output = abspath(args.output)
 args.FASTA_file = abspath(args.FASTA_file)
 
+# Ensure output directory is writeable
+try:
+    test_path = os.path.join(args.output, 'test')
+    with open(test_path, 'w') as test:
+        pass
+    os.unlink(test_path)
+except (IOError, PermissionError):
+    raise IOError("Your specified output directory is not writeable. Please choose a different output directory.")
+
 run(args)
