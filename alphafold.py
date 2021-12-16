@@ -80,6 +80,7 @@ try:
         pass
     os.unlink(test_path)
 except (IOError, PermissionError):
-    raise IOError("Your specified output directory is not writeable. Please choose a different output directory.")
+    raise IOError(f"Your specified output directory '{args.output}' is not writeable. Please choose a different output "
+                  f"directory.")
 
 run(args)
