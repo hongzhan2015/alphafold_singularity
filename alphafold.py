@@ -79,7 +79,7 @@ args.singularity_container = abspath(args.singularity_container)
 
 # Ensure output directory is writeable
 try:
-    test_path = os.path.join(args.output, 'test')
+    test_path = os.path.join(args.output, '.KD5cpxqYzBNqaBZ66guDuh33ns7JYz2jrKq')
     with open(test_path, 'w') as test:
         pass
     os.unlink(test_path)
