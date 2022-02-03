@@ -30,6 +30,14 @@ def run(arguments):
     if num_chains == 0:
         raise ValueError('Your FASTA file does\'t appear to be valid. Please consult documentation here: '
                          'https://en.wikipedia.org/wiki/FASTA_format')
+    for chain in sequences:
+        if chain[1].upper() != chain[1]:
+            raise ValueError('Your FASTA file does\'t appear to be valid. All residues must be specified '
+                             f'using capital letters. Problem in sequence: {chain[1]}')
+        if 'X' in chain[1]:
+            raise ValueError('You have an unknown residue in your sequence - that isn\'t allowed. Problem in sequence '
+                             f'{chain[1]}')
+
 
     # Build the command
     command = ['singularity', 'exec', '--nv', '-B', arguments.database, '-B',
