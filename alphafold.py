@@ -58,8 +58,7 @@ def run(arguments):
         print(f"AlphaFold raised an exception. Exception: {err}\nstdout:\n{err.output}\n\nstderr:\n{err.stderr}")
         sys.exit(1)
 
-    print(f"AlphaFold completed without exception. You can find your results in "
-          f"{abspath(os.path.join(arguments.output, os.path.basename(arguments.FASTA_file)))}")
+    print(f"AlphaFold completed without exception. You can find your results in {abspath(arguments.output)}")
 
 
 parser = argparse.ArgumentParser()
