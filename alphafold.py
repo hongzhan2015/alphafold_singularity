@@ -39,9 +39,9 @@ def run(arguments):
                              f'{chain[1]}')
 
     total_aa = sum([len(_[1]) for _ in sequences])
-    if total_aa > 600:
+    if total_aa > 800:
         print('AlphaFold uses memory in accordance with the total number of amino acids in all chains. '
-              f'As you have more than 600 amino acids in total ({total_aa}), you may run out of memory when running '
+              f'As you have more than 800 amino acids in total ({total_aa}), you may run out of memory when running '
               f'AlphaFold. You can look at the VM dashboard in your '
               'user profile and select a machine with high amounts of memory to try again, but ultimately very long '
               'sequences require more RAM than available on any NMRbox machine.')
