@@ -38,6 +38,11 @@ def run(arguments):
             raise ValueError('You have an unknown residue in your sequence - that isn\'t allowed. Problem in sequence '
                              f'{chain[1]}')
 
+    if max([len(_[1]) for _ in sequences]) > 400:
+        print('AlphaFold uses memory in accordance with sequence length. As your sequence length is '
+              'large, you are likely to run out of memory during computation. You can look at the VM dashboard in your '
+              'user profile and select a machine with high amounts of memory to try again, but ultimately very long '
+              'sequences require more RAM than available on any NMRbox machine.')
 
     # Build the command
     command = ['singularity', 'exec', '--nv', '-B', arguments.database, '-B',
