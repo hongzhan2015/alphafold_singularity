@@ -55,7 +55,8 @@ def run(arguments):
     try:
         subprocess.run(command, check=True, capture_output=True)
     except subprocess.CalledProcessError as err:
-        print(f"AlphaFold raised an exception. Exception: {err}\nstdout:\n{err.output}\n\nstderr:\n{err.stderr}")
+        print(f"AlphaFold raised an exception. Exception: {err}\nstdout:\n"
+              f"{err.output.decode()}\n\nstderr:\n{err.stderr.decode()}")
         sys.exit(1)
 
     print(f"AlphaFold completed without exception. You can find your results in {abspath(arguments.output)}")
