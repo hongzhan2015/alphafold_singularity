@@ -38,9 +38,11 @@ def run(arguments):
             raise ValueError('You have an unknown residue in your sequence - that isn\'t allowed. Problem in sequence '
                              f'{chain[1]}')
 
-    if max([len(_[1]) for _ in sequences]) > 400:
-        print('AlphaFold uses memory in accordance with sequence length. As your sequence length is '
-              'large, you are likely to run out of memory during computation. You can look at the VM dashboard in your '
+    total_aa = sum([len(_[1]) for _ in sequences])
+    if total_aa > 600:
+        print('AlphaFold uses memory in accordance with the total number of amino acids in all chains. '
+              f'As you have more than 600 amino acids in total ({total_aa}), you may run out of memory when running '
+              f'AlphaFold. You can look at the VM dashboard in your '
               'user profile and select a machine with high amounts of memory to try again, but ultimately very long '
               'sequences require more RAM than available on any NMRbox machine.')
 
