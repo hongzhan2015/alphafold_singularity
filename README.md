@@ -12,6 +12,8 @@ Clone repository into your home directory and `cd` into the cloned folder.
 
 ## Build container
 ```
+export APPTAINER_CACHEDIR=$PWD
+export TMPDIR=$PWD
 # build base container
 apptainer build base.sif base.def
 # build alphafold container
