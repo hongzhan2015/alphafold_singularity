@@ -1,5 +1,6 @@
 Bootstrap: localimage
-From: base.sif
+#From: base.sif
+From: base-2.3.2.sif
 
 # Build instructions from
 # https://github.com/kalininalab/alphafold_non_docker
