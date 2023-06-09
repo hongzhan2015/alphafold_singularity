@@ -4,6 +4,6 @@ Bootstrap: docker
 # NVIDIA TensorFlow release 23.03 is based on TensorFlow 1.15.5.
 # List: https://github.com/NVIDIA/tensorflow/releases
 
-From: docker pull nvcr.io/nvidia/tensorflow:23.02-tf1-py3
+From:nvcr.io/nvidia/tensorflow:23.02-tf1-py3
 
 # used 21.06 to meet cudnn==8.2.1.32 cudatoolkit==11.0.3
