@@ -32,7 +32,7 @@ requirements = (HasGpulabData == true)
 transfer_executable = false
 # replace with multimer.sh if applicable
 executable = /opt/alphafold/monomer.sh
-arguments = /gpulab_data/alphafold FASTA_file 
+arguments = /gpulab_data/alphafold FASTA_file DIR 2020-04-08
 
 transfer_input_files = alphafold.sif, FASTA_file
 
@@ -46,3 +46,12 @@ transfer_input_files = alphafold.sif, FASTA_file
 * The run script allows customizing the database location and max_template_date. Call with `-h` to see usage information.
 * By default, this uses the `monomer` model for monomers and the `multimer` model for multimers,
   and uses the `full_dbs` option for better quality results. For more details, see https://github.com/deepmind/alphafold#running-alphafold
+  
+Added note:
+
+The `arguments` should contain 4 items:
+
+- Databases dir: *e.g.* `/gpulab_data/alphafold`
+- FASTA_file: fasta file containing sequence(s)
+- DIR: directory to save into *e.g.* `${PWD}`
+- 2020-04-08: cutoff date for PDB templates used.
