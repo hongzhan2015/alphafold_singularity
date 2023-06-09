@@ -21,7 +21,7 @@ From: base-2.3.2.sif
     conda update -n base conda
     conda activate alphafold
 
-    conda install -y -c conda-forge conda==4.13.0 omnia openmm==7.7.0 cudnn==8.2.1.32 cudatoolkit==11.1.1 pdbfixer python==3.8
+    conda install -y -c conda-forge conda==4.13.0 openmm==7.7.0 cudnn==8.2.1.32 cudatoolkit==11.1.1 pdbfixer python==3.8
     conda install -y -c bioconda hmmer==3.3.2 hhsuite==3.3.0 kalign2==2.04
 
     # alphafold setup
