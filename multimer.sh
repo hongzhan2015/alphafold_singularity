@@ -16,8 +16,10 @@ python3 /opt/alphafold/run_alphafold.py \
  --uniref30_database_path "$1"/uniref30 \
  --pdb_seqres_database_path "$1"/pdb_seqres/pdb_seqres.txt \
  --uniprot_database_path "$1"/uniprot/uniprot.fasta \
- --pdb70_database_path "$1"/pdb70/ \
  --use_gpu_relax
   
 # removed:
 #   --uniclust30_database_path "$1"/uniclust30/uniclust30_2018_08/uniclust30_2018_08 \
+#   --pdb70_database_path "$1"/pdb70/ \ 
+# NOTE after error:
+# ValueError: pdb70_database_path must not be set when running with "--model_preset=multimer".
