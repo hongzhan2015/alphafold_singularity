@@ -13,7 +13,7 @@ python3 /opt/alphafold/run_alphafold.py \
  --template_mmcif_dir "$1"/pdb_mmcif/mmcif_files \
  --obsolete_pdbs_path "$1"/pdb_mmcif/obsolete.dat \
  --bfd_database_path "$1"/bfd/ \
- --uniref90_database_path "$1"/uniref30 \
+ --uniref30_database_path "$1"/uniref30 \
  --pdb_seqres_database_path "$1"/pdb_seqres/pdb_seqres.txt \
  --uniprot_database_path "$1"/uniprot/uniprot.fasta \
  --pdb70_database_path "$1"/pdb70 \
