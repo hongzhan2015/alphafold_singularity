@@ -15,6 +15,6 @@ python3 /opt/alphafold/run_alphafold.py \
  --uniref30_database_path "$1"/uniref30 \
  --pdb_seqres_database_path "$1"/pdb_seqres/pdb_seqres.txt \
  --uniprot_database_path "$1"/uniprot/uniprot.fasta \
- --pdb70_database_path "$1"/pdb70 \
+ --pdb70_database_path "$1"/pdb70/ \
  --use_gpu_relax
 
