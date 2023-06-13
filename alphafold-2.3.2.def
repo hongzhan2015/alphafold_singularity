@@ -27,7 +27,12 @@ From: base-2.3.2.sif
     # alphafold setup
     cd /opt/
 #    git clone https://github.com/deepmind/alphafold.git --branch v2.2.0
-    git clone https://github.com/deepmind/alphafold.git --branch v2.3.2
+#    git clone https://github.com/deepmind/alphafold.git --branch v2.3.2
+#    In fact branch is NOT up to date ... amber_minimize.py", line 33
+#    from simtk.openmm.app.internal.pdbstructure import PdbStructure
+#    IS NOT correct ==>> redo without specifying branch wich should get correct version
+
+    git clone https://github.com/deepmind/alphafold.git
     alphafold_path="/opt/alphafold"
 
     wget -q -P alphafold/alphafold/common/ https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
