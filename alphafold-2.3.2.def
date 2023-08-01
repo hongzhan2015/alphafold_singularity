@@ -32,7 +32,11 @@ From: base-2.3.2.sif
 #    from simtk.openmm.app.internal.pdbstructure import PdbStructure
 #    IS NOT correct ==>> redo without specifying branch wich should get correct version
 
-    git clone https://github.com/deepmind/alphafold.git
+#    Version online was correct... but has evolved... so change to my older copy
+#    git clone https://github.com/deepmind/alphafold.git
+#    Change to my cloned copy from that date, since now they have updated to python 3.10 
+
+    git clone https://github.com/jsgro/alphafold.git    
     alphafold_path="/opt/alphafold"
 
     wget -q -P alphafold/alphafold/common/ https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
