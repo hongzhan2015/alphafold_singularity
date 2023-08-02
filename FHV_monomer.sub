@@ -1,0 +1,34 @@
+# starter submit file for CHTC jobs
+universe = container
+# load sif image file
+container_image = /PATH/TO/SIF/IMAGE
+log = output/$(JobName)_$(batch_name)_$(Cluster).log
+error = output/$(JobName)_$(batch_name)_$(Cluster)_$(Process).err
+output = output/$(JobName)_$(batch_name)_$(Cluster)_$(Process).out
+
+arguments = /PATH/TO/DATABASE FASTA_FILE DUMMY 2023-06-01
+
+executable = runFHV_monomer.sh
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+#transfer_output_files = outputs
+transfer_input_files = $(FASTA_file), runFHV_monomer.sh, FHV.sh
+
+requirements = (HasGpulabData == true)
++WantGpuLab = true
+
+request_gpus = 1
+request_cpus = 4
+
+request_memory = 350GB
+request_disk = 220GB
+
+require_gpus = (GlobalMemoryMB >= 60000)
+# Suggestions from https://chtc.cs.wisc.edu/uw-research-computing/high-memory-jobs
+
+batch_name = FHV_monomer
+
+queue FASTA_file JobName from (
+FHV_proteinA_wt.fasta FHV_monomer
+)
